@@ -1,0 +1,33 @@
+package com.mycompany.activity1;
+
+import java.util.Scanner;
+
+public class Activity1 {
+  public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please provide the following:");
+
+        System.out.print("Menu Item: ");
+        String item = input.nextLine();
+        
+        System.out.print("Category: ");
+        String category = input.nextLine();
+
+        System.out.print("Price: ");
+        double price = input.nextDouble();
+
+        System.out.print("Serving Size: ");
+        int servingsize = input.nextInt();
+
+        System.out.println("Menu");
+        System.out.println("Item: " + item);
+        System.out.println("Category: " + category);
+        System.out.println("Main Course");
+        System.out.println("Price: PHP " + price);
+        System.out.println("Serving Size: " + servingsize);
+
+        input.close();
+    }
+}

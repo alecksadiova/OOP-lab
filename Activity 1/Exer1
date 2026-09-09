@@ -1,1 +1,36 @@
+package com.mycompany.activity1;
 
+import java.util.Scanner;
+
+public class Activity1 {
+  public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please provide the following:");
+
+        System.out.print("Full Name: ");
+        String fullName = input.nextLine();
+
+        System.out.print("Student Number: ");
+        String studentNumber = input.nextLine();
+
+        System.out.print("Program: ");
+        String program = input.nextLine();
+
+        System.out.print("Year Level: ");
+        int yearLevel = input.nextInt();
+
+        System.out.print("GPA: ");
+        double gpa = input.nextDouble();
+
+        System.out.println("Student Profile");
+        System.out.println("Name: " + fullName);
+        System.out.println("Student Number: " + studentNumber);
+        System.out.println("Program: " + program);
+        System.out.println("Year Level: " + yearLevel);
+        System.out.println("GPA: " + gpa);
+
+        input.close();
+    }
+}

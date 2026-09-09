@@ -1,0 +1,32 @@
+package com.mycompany.activity1;
+
+import java.util.Scanner;
+
+public class Activity1 {
+  public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please provide the following:");
+
+        System.out.print("Guest: ");
+        String brand = input.nextLine();
+        
+        System.out.print("Room : ");
+        int roomNum = input.nextInt();
+
+        System.out.print("Nights: ");
+        int nights = input.nextInt();
+
+        System.out.print("Room Rate: ");
+        double roomRate = input.nextDouble();
+        
+        System.out.println("Hotel Guest Information");
+        System.out.println("Guest: " + brand);
+        System.out.println("Room: " + roomNum);
+        System.out.println("Nights: " + nights);
+        System.out.println("Room Rate: PHP " + roomRate);
+        
+        input.close();
+    }
+}

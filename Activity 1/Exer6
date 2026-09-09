@@ -1,0 +1,35 @@
+package com.mycompany.activity1;
+
+import java.util.Scanner;
+
+public class Activity1 {
+  public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Please provide the following:");
+
+        System.out.print("Title: ");
+        String title = input.nextLine();
+        
+        System.out.print("Director: ");
+        String director = input.nextLine();
+
+        System.out.print("Year: ");
+        int year = input.nextInt();
+
+        System.out.print("Runtime: ");
+        int runtime = input.nextInt();
+        
+        System.out.print("Rating: ");
+        double rating = input.nextDouble();
+        
+        System.out.println("Movie Information");
+        System.out.println("Title: " + title);
+        System.out.println("Director: " + director);
+        System.out.println("Year: " + year);
+        System.out.println("Runtime: " + runtime + " minutes");
+        System.out.println("Rating: " + rating);
+        input.close();
+    }
+}

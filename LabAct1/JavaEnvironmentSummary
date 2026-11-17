@@ -1,0 +1,19 @@
+package com.mycompany.javaenvironmentsummary;
+
+
+public class JavaEnvironmentSummary {
+    public static void main(String[] args) {
+
+        System.out.println("=== Java Environment Summary ===");
+        System.out.println("Student Name: Alecks Adiova");
+        System.out.println("Program/Section: BSCSAI - TN22");
+
+        // Display the current Java environment information
+        System.out.println("Java Version: " + System.getProperty("java.version"));
+        System.out.println("JVM Name: " + System.getProperty("java.vm.name"));
+        System.out.println("Operating System: " + System.getProperty("os.name"));
+
+        System.out.println("Execution Flow:");
+        System.out.println(".java source -> javac compiler -> .class bytecode -> JVM -> output");
+    }
+}

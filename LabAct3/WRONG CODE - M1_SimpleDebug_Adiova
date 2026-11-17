@@ -1,0 +1,15 @@
+package com.mycompany.m1_simpledebug_adiova;
+
+public class M1_SimpleDebug_Adiova {
+    public static void main(String[] args) {
+        int[] scores = {80, 90, 70};
+        int total = 0
+
+        for (int i = 0; i <= scores.length; i++) {
+            total += scores[i];
+        }
+
+        double average = total / 4;
+        System.out.println("Average: " + average);
+    }
+}

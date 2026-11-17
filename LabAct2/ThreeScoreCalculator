@@ -1,0 +1,33 @@
+package com.mycompany.threescorecalculator;
+
+import java.util.Scanner;
+
+public class ThreeScoreCalculator {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        final double PASSING_SCORE = 75.0;
+        int[] scores = new int[3];
+        int total = 0;
+
+        System.out.print("Enter student name: ");
+        String name = input.nextLine().trim();
+
+        for (int i = 0; i < scores.length; i++) {
+            System.out.print("Enter score " + (i + 1) + ": ");
+            scores[i] = input.nextInt();
+            total += scores[i];
+        }
+
+        double average = (double) total / scores.length;
+        boolean passed = average >= PASSING_SCORE;
+
+        System.out.println("\n=== Student Score Summary ===");
+        System.out.println("Student Name: " + name);
+        System.out.printf("Total: %d%n", total);
+        System.out.printf("Average: %.2f%n", average);
+        System.out.printf("Passed: %b%n", passed);
+
+        input.close();
+    }
+}

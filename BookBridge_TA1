@@ -1,0 +1,200 @@
+package com.mycompany.bookbridge_tsa1;
+import java.util.Scanner;
+
+public class BookBridgeApp {
+
+    static final int TOTAL_REQUESTS = 5;
+
+    public static boolean validateMembershipType(String type) {
+        return type.equals("STUDENT") ||
+               type.equals("FACULTY") ||
+               type.equals("GUEST");
+    }
+
+    public static int getMaximumDays(String type) {
+        switch (type) {
+            case "STUDENT":
+                return 14;
+            case "FACULTY":
+                return 30;
+            case "GUEST":
+                return 7;
+            default:
+                return 0;
+        }
+    }
+
+    public static int getDailyFine(String type) {
+        switch (type) {
+            case "STUDENT":
+                return 5;
+            case "FACULTY":
+                return 2;
+            case "GUEST":
+                return 10;
+            default:
+                return 0;
+        }
+    }
+
+    public static String classifyRequest(String type, int days, boolean available) {
+        if (!available) {
+            return "RESERVED";
+        } else if (days <= getMaximumDays(type)) {
+            return "APPROVED";
+        } else {
+            return "DENIED";
+        }
+    }
+
+    public static void printSummary(String[] results, int[] loanDays,
+                                    double[] fines) {
+        int approved = 0;
+        int reserved = 0;
+        int denied = 0;
+        int highestDays = loanDays[0];
+        int highestIndex = 0;
+        double totalFines = 0;
+
+        for (int i = 0; i < TOTAL_REQUESTS; i++) {
+            if (results[i].equals("APPROVED")) {
+                approved++;
+            } else if (results[i].equals("RESERVED")) {
+                reserved++;
+            } else {
+                denied++;
+            }
+
+            if (loanDays[i] > highestDays) {
+                highestDays = loanDays[i];
+                highestIndex = i;
+            }
+
+            totalFines += fines[i];
+        }
+
+        System.out.println("\n=== FINAL SUMMARY ===");
+        System.out.println("Approved: " + approved);
+        System.out.println("Reserved: " + reserved);
+        System.out.println("Denied: " + denied);
+        System.out.println("Request with greatest loan days: " + (highestIndex + 1));
+        System.out.println("Greatest requested days: " + highestDays);
+        System.out.printf("Total Estimated Late Charges: PHP %.2f%n", totalFines);
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        String[] memberIds = new String[TOTAL_REQUESTS];
+        String[] memberNames = new String[TOTAL_REQUESTS];
+        String[] membershipTypes = new String[TOTAL_REQUESTS];
+        String[] isbns = new String[TOTAL_REQUESTS];
+        String[] bookTitles = new String[TOTAL_REQUESTS];
+
+        int[] loanDays = new int[TOTAL_REQUESTS];
+        int[] lateDays = new int[TOTAL_REQUESTS];
+        boolean[] available = new boolean[TOTAL_REQUESTS];
+        String[] results = new String[TOTAL_REQUESTS];
+        double[] fines = new double[TOTAL_REQUESTS];
+
+        System.out.println("=== BookBridge Library System ===");
+
+        for (int i = 0; i < TOTAL_REQUESTS; i++) {
+            System.out.println("\nTransaction " + (i + 1));
+
+            do {
+                System.out.print("Member ID: ");
+                memberIds[i] = input.nextLine().trim();
+            } while (memberIds[i].isEmpty());
+
+            do {
+                System.out.print("Member Name: ");
+                memberNames[i] = input.nextLine().trim();
+            } while (memberNames[i].isEmpty());
+
+            do {
+                System.out.print("Membership Type (STUDENT/FACULTY/GUEST): ");
+                membershipTypes[i] = input.nextLine().trim().toUpperCase();
+
+                if (!validateMembershipType(membershipTypes[i])) {
+                    System.out.println("Invalid membership type!");
+                }
+            } while (!validateMembershipType(membershipTypes[i]));
+
+            do {
+                System.out.print("ISBN: ");
+                isbns[i] = input.nextLine().trim();
+            } while (isbns[i].isEmpty());
+
+            do {
+                System.out.print("Book Title: ");
+                bookTitles[i] = input.nextLine().trim();
+            } while (bookTitles[i].isEmpty());
+
+            while (true) {
+                System.out.print("Requested Loan Days (1-30): ");
+                String value = input.nextLine().trim();
+
+                try {
+                    loanDays[i] = Integer.parseInt(value);
+
+                    if (loanDays[i] >= 1 && loanDays[i] <= 30) {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ask again for invalid numbers
+                }
+
+                System.out.println("Invalid loan days! Enter 1 to 30.");
+            }
+
+            while (true) {
+                System.out.print("Book Available (true/false): ");
+                String value = input.nextLine().trim();
+
+                if (value.equalsIgnoreCase("true") ||
+                    value.equalsIgnoreCase("false")) {
+                    available[i] = Boolean.parseBoolean(value);
+                    break;
+                }
+
+                System.out.println("Invalid input! Enter true or false.");
+            }
+
+            while (true) {
+                System.out.print("Late Days: ");
+                String value = input.nextLine().trim();
+
+                try {
+                    lateDays[i] = Integer.parseInt(value);
+
+                    if (lateDays[i] >= 0) {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    // Ask again for invalid numbers
+                }
+
+                System.out.println("Invalid late days!");
+            }
+
+            results[i] = classifyRequest(
+                    membershipTypes[i], loanDays[i], available[i]);
+
+            fines[i] = lateDays[i] * getDailyFine(membershipTypes[i]);
+
+            System.out.println("\n--- Transaction Result ---");
+            System.out.println("Member ID: " + memberIds[i]);
+            System.out.println("Member Name: " + memberNames[i]);
+            System.out.println("Membership: " + membershipTypes[i]);
+            System.out.println("ISBN: " + isbns[i]);
+            System.out.println("Book: " + bookTitles[i]);
+            System.out.println("Requested Days: " + loanDays[i]);
+            System.out.println("Status: " + results[i]);
+            System.out.printf("Estimated Late Charge: PHP %.2f%n", fines[i]);
+        }
+
+        printSummary(results, loanDays, fines);
+        input.close();
+    }
+}

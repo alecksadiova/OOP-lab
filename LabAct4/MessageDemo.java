@@ -4,7 +4,7 @@ public class MessageDemo {
 
     public static void main(String[] args) {
 
-        EmailMessage email = new EmailMessage("student@ust.edu.ph");
+        EmailMessage email = new EmailMessage("aaadiova@fit.edu.ph");
         SmsMessage sms = new SmsMessage("09123456789");
 
         Message[] messages = {email, sms};

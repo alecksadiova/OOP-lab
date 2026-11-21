@@ -1,5 +1,4 @@
 package com.mycompany.m4a1_adiova;
-
 public class Bus extends Vehicle {
 
     private int capacity;

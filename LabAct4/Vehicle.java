@@ -1,5 +1,4 @@
 package com.mycompany.m4a1_adiova;
-
 public class Vehicle {
 
     private String vehicleName;
